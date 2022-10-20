@@ -1191,3 +1191,26 @@ Sub Macro4()
     Selection.InlineShapes(1).PictureFormat.CropTop = 34.87
     Selection.InlineShapes(1).PictureFormat.CropBottom = 22.68
 End Sub
+
+
+
+
+
+Sub 批量处理word文档()
+   Dim path   As String
+   Dim FileName  As String
+   Dim worddoc   As Document
+   Dim MyDir  As String
+MyDir = ""   '这里替换为实际的文件夹地址
+   FileName = Dir(MyDir & "*.docx", vbNormal)
+   Do Until FileName = ""
+   If FileName <> ThisDocument.Name Then
+         Set worddoc = Documents.Open(MyDir & "" & FileName)
+         worddoc.Activate
+            Call 宏名称  '替换为要执行的宏的名称
+         worddoc.Close True
+         FileName = Dir()
+    End If
+   Loop
+Set worddoc = Nothing
+End Sub
